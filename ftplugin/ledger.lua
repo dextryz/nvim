@@ -1,0 +1,5 @@
+vim.cmd('abb beef Expense:Food:Meat:Beef   ')
+vim.cmd('abb z ZAR')
+vim.cmd('abb c CAD')
+vim.cmd('abb u USD')
+vim.cmd('abb h HKD')
