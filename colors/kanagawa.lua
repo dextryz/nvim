@@ -81,7 +81,7 @@ vim.api.nvim_set_hl(0, "PmenuSel",     { fg = nil, bg = color.waveBlue1, bold = 
 vim.api.nvim_set_hl(0, "NonText",      { fg = color.sumiInk4, bg = nil})
 vim.api.nvim_set_hl(0, "Visual",       { fg = nil, bg = color.sumiInk4 })
 vim.api.nvim_set_hl(0, "SignColumn",   { fg = color.sumiInk0 , bg = nil })
-vim.api.nvim_set_hl(0, "CursorLine",   { fg = nil, bg = sumiInk3 })
+vim.api.nvim_set_hl(0, "CursorLine",   { fg = nil, bg = color.sumiInk3 })
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = color.fujiWhite, bg = nil })
 vim.api.nvim_set_hl(0, "Folded",       { fg = nil, bg = color.sumiInk4 })
 
