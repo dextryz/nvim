@@ -1,4 +1,3 @@
-
 vim.cmd('abb apple Expense:Food:Fruit:Apple  ')
 vim.cmd('abb avocado Expense:Food:Fruit:Avocado  ')
 vim.cmd('abb banana Expense:Food:Fruit:Banana  ')

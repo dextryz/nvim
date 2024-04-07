@@ -48,6 +48,18 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true, expr = true }
 )
 
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+vim.keymap.set("n", "<leader>x", "<cmd> !chmod +x % <CR>", { silent = true })
+
+-- Format .ledger file for personal finance
+vim.keymap.set("n", "<leader>fl", "<cmd> 0r !lgfmt % <CR>", { silent = true })
+vim.keymap.set("n", "<leader>fg", "<cmd> !go fmt % <CR>", { silent = true })
+
+
 -------------------------------------------------------------------------------
 -- LSP
 -------------------------------------------------------------------------------
@@ -124,6 +136,7 @@ lsp.lua_ls.setup {
     },
 }
 
+vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opt)
 map('n', 'gd',        "<cmd> lua vim.lsp.buf.definition() <cr>",  opt)
 map('n', 'gc',        "<cmd> lua vim.lsp.buf.code_action() <cr>",  opt)
 map('n', '<Leader>h', "<cmd> lua vim.lsp.buf.hover() <cr>",       opt)

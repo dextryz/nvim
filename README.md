@@ -1,3 +1,5 @@
+## Setup
+
 ```shell
 # Set the following env vars.
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -9,3 +11,8 @@ make clean
 # Intall all plugins.
 make install
 ```
+
+## Cheat Sheet
+
+- `Shift-j`: Pull lines with newlines up multiple times.
+

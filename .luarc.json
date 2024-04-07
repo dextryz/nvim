@@ -1,0 +1,22 @@
+{
+    "workspace.library": [
+        "/Users/rubenvanstaden/.config/nvim",
+        "/Users/rubenvanstaden/.local/share/nvim/site",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/cmp-nvim-lsp",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/cmp-path",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/cmp_luasnip",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/friendly-snippets",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/LuaSnip",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/nvim-autopairs",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/nvim-cmp",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/nvim-lspconfig",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/vim-ledger",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/zk-nvim",
+        "/Users/rubenvanstaden/.local/src/nvim-v0.8.3/share/nvim/runtime",
+        "/Users/rubenvanstaden/.local/src/nvim-v0.8.3/lib/nvim",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/cmp-nvim-lsp/after",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/cmp-path/after",
+        "/Users/rubenvanstaden/.local/share/nvim/site/pack/_/start/cmp_luasnip/after",
+        "${3rd}/luassert/library"
+    ]
+}
