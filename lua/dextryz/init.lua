@@ -53,12 +53,14 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+vim.keymap.set("n", "<leader>p", ":bPrev <CR>")
+vim.keymap.set("n", "<leader>n", ":bNext <CR>")
+
 vim.keymap.set("n", "<leader>x", "<cmd> !chmod +x % <CR>", { silent = true })
 
 -- Format .ledger file for personal finance
 vim.keymap.set("n", "<leader>fl", "<cmd> 0r !lgfmt % <CR>", { silent = true })
 vim.keymap.set("n", "<leader>fg", "<cmd> !go fmt % <CR>", { silent = true })
-
 
 -------------------------------------------------------------------------------
 -- LSP
@@ -74,6 +76,18 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- https://github.com/mickael-menu/zk/blob/main/docs/editors-integration.md
 require("zk").setup({
     capabilities = capabilities,
+})
+
+lsp.templ.setup({})
+
+lsp.html.setup({
+    capabilities = capabilities,
+    filetypes = { "html", "templ" },
+})
+
+lsp.htmx.setup({
+    capabilities = capabilities,
+    filetypes = { "html", "templ" },
 })
 
 -- https://clangd.llvm.org/installation#compile_commandsjson
@@ -191,6 +205,31 @@ cmp.setup({
 map("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 
 -------------------------------------------------------------------------------
+-- https://templ.guide/commands-and-tools/ide-support/#neovim--050
+-------------------------------------------------------------------------------
+
+vim.filetype.add({ extension = { templ = "templ" } })
+
+local templ_format = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local filename = vim.api.nvim_buf_get_name(bufnr)
+    local cmd = "templ fmt " .. vim.fn.shellescape(filename)
+
+    vim.fn.jobstart(cmd, {
+        on_exit = function()
+            -- Reload the buffer only if it's still the current buffer
+            if vim.api.nvim_get_current_buf() == bufnr then
+                vim.cmd('e!')
+            end
+        end,
+    })
+end
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, { pattern = { "*.templ" }, callback = templ_format })
+
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
 -- Disable Plugins
 -------------------------------------------------------------------------------
 
@@ -212,3 +251,44 @@ vim.g.loaded_netrwSettings     = 1
 vim.g.loaded_netrwFileHandlers = 1
 
 -------------------------------------------------------------------------------
+
+
+function float_buffer_list()
+    local buf = vim.api.nvim_create_buf(false, true) -- Create a new empty buffer
+    local width = vim.api.nvim_get_option("columns")
+    local height = vim.api.nvim_get_option("lines")
+
+    -- Calculate the window size and position
+    local win_height = math.ceil(height * 0.8 - 4)
+    local win_width = math.ceil(width * 0.8)
+    local row = math.ceil((height - win_height) / 2 - 1)
+    local col = math.ceil((width - win_width) / 2)
+
+    -- Define window options
+    local opts = {
+        style = "minimal",
+        relative = "editor",
+        width = win_width,
+        height = win_height,
+        row = row,
+        col = col
+    }
+
+    -- Create a floating window
+    local win = vim.api.nvim_open_win(buf, true, opts)
+
+    -- List buffers
+    local buffers = vim.api.nvim_list_bufs()
+    local lines = {}
+    for _, buffer in ipairs(buffers) do
+        if vim.api.nvim_buf_is_loaded(buffer) then
+            table.insert(lines, vim.api.nvim_buf_get_name(buffer))
+        end
+    end
+
+    -- Set lines in buffer
+    vim.api.nvim_buf_set_lines(buf, 0, -1, true, lines)
+end
+
+vim.api.nvim_set_keymap('n', '<leader>b', ':lua float_buffer_list()<CR>', {noremap = true, silent = true})
+
