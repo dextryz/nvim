@@ -163,7 +163,7 @@ require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
 -------------------------------------------------------------------------------
--- Snippets & Autocompletion
+-- Snippets
 -------------------------------------------------------------------------------
 
 cmp.setup({
@@ -228,8 +228,6 @@ end
 vim.api.nvim_create_autocmd({ "BufWritePre" }, { pattern = { "*.templ" }, callback = templ_format })
 
 -------------------------------------------------------------------------------
-
--------------------------------------------------------------------------------
 -- Disable Plugins
 -------------------------------------------------------------------------------
 
@@ -251,44 +249,5 @@ vim.g.loaded_netrwSettings     = 1
 vim.g.loaded_netrwFileHandlers = 1
 
 -------------------------------------------------------------------------------
-
-
-function float_buffer_list()
-    local buf = vim.api.nvim_create_buf(false, true) -- Create a new empty buffer
-    local width = vim.api.nvim_get_option("columns")
-    local height = vim.api.nvim_get_option("lines")
-
-    -- Calculate the window size and position
-    local win_height = math.ceil(height * 0.8 - 4)
-    local win_width = math.ceil(width * 0.8)
-    local row = math.ceil((height - win_height) / 2 - 1)
-    local col = math.ceil((width - win_width) / 2)
-
-    -- Define window options
-    local opts = {
-        style = "minimal",
-        relative = "editor",
-        width = win_width,
-        height = win_height,
-        row = row,
-        col = col
-    }
-
-    -- Create a floating window
-    local win = vim.api.nvim_open_win(buf, true, opts)
-
-    -- List buffers
-    local buffers = vim.api.nvim_list_bufs()
-    local lines = {}
-    for _, buffer in ipairs(buffers) do
-        if vim.api.nvim_buf_is_loaded(buffer) then
-            table.insert(lines, vim.api.nvim_buf_get_name(buffer))
-        end
-    end
-
-    -- Set lines in buffer
-    vim.api.nvim_buf_set_lines(buf, 0, -1, true, lines)
-end
-
-vim.api.nvim_set_keymap('n', '<leader>b', ':lua float_buffer_list()<CR>', {noremap = true, silent = true})
-
+-- End
+-------------------------------------------------------------------------------

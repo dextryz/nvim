@@ -1,3 +1,5 @@
+-- https://github.com/rebelot/kanagawa.nvim
+
 local color = {
     sumiInk0      = "#16161D",
     sumiInk1b     = "#181820",
@@ -41,7 +43,10 @@ local color = {
     katanaGray    = "#717C7C"
 }
 
+---------------------------------------------------------------------------------------------------
 -- Code
+---------------------------------------------------------------------------------------------------
+
 vim.api.nvim_set_hl(0, "Normal",       { fg = color.fujiWhite, bg = nil })
 vim.api.nvim_set_hl(0, "Statement",    { fg = color.oniViolet, bg = nil, italic = true })
 vim.api.nvim_set_hl(0, "Repeat",       { link = "Statement" })
@@ -72,7 +77,10 @@ vim.api.nvim_set_hl(0, "Comment",      { fg = color.fujiGray, italic = true })
 vim.api.nvim_set_hl(0, "Search",       { fg = color.waveBlue2, reverse = true })
 vim.api.nvim_set_hl(0, "MatchParen",   { fg = color.springViolet2, bg = nil, bold = true })
 
+---------------------------------------------------------------------------------------------------
 -- Editor
+---------------------------------------------------------------------------------------------------
+
 vim.api.nvim_set_hl(0, "LineNr",       { fg = color.sumiInk4, bg = nil, bold = false })
 vim.api.nvim_set_hl(0, "SpecialKey",   { fg = color.springBlue, bg = nil })
 vim.api.nvim_set_hl(0, "StatusLine",   { fg = nil, bg = color.sumiInk0 })
@@ -85,7 +93,10 @@ vim.api.nvim_set_hl(0, "CursorLine",   { fg = nil, bg = color.sumiInk3 })
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = color.fujiWhite, bg = nil })
 vim.api.nvim_set_hl(0, "Folded",       { fg = nil, bg = color.sumiInk4 })
 
+---------------------------------------------------------------------------------------------------
 -- Diagnostics
+---------------------------------------------------------------------------------------------------
+
 vim.api.nvim_set_hl(0, "Error",           { fg = color.peachRed, bg = nil})
 vim.api.nvim_set_hl(0, "ErrorMsg",        { link = "Error" })
 vim.api.nvim_set_hl(0, "DiagnosticError", { link = "Error" })
@@ -93,5 +104,8 @@ vim.api.nvim_set_hl(0, "Warnings",        { fg = color.roninYellow, bg = nil })
 vim.api.nvim_set_hl(0, "WarningMsg",      { link = "Warnings" })
 vim.api.nvim_set_hl(0, "DiagnosticWarn",  { link = "Warnings" })
 
--- Markdown
+---------------------------------------------------------------------------------------------------
+-- Filetypes
+---------------------------------------------------------------------------------------------------
+
 vim.api.nvim_set_hl(0, "markdownCode", { fg = color.waveAqua1 })
