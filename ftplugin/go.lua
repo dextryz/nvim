@@ -1,5 +1,4 @@
 vim.cmd('abb fn func')
-vim.cmd('abb ch chan')
 
 vim.cmd('abb iter for i := 0; i < ; i++')
 vim.cmd('abb range for _, v := range')

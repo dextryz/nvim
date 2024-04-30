@@ -137,6 +137,10 @@ local color = {
 vim.api.nvim_set_hl(0, "Normal",      { fg = color.base0, bg = nil })
 vim.api.nvim_set_hl(0, "Comment",     { fg = color.base01, bg = nil, italic = true })
 vim.api.nvim_set_hl(0, "Statement",   { fg = color.green500, bg = nil, italic = false })
+
+vim.api.nvim_set_hl(0, "Conditional",   { fg = color.blue500, bg = nil, italic = false })
+vim.api.nvim_set_hl(0, "Repeat",   { fg = color.violet500, bg = nil, italic = false })
+
 vim.api.nvim_set_hl(0, "Keyword",     { fg = color.green500, bg = nil })
 vim.api.nvim_set_hl(0, "Function",     { fg = color.blue500, bg = nil })
 vim.api.nvim_set_hl(0, "Identifier",     { fg = color.blue500, bg = nil })
@@ -160,6 +164,7 @@ vim.api.nvim_set_hl(0, "Visual",       { fg = color.bg, bg = color.base0 })
 vim.api.nvim_set_hl(0, "CursorLine",       { fg = nil, bg = color.base03 })
 vim.api.nvim_set_hl(0, "StatusLine",       { fg = color.base1, bg = color.base03 })
 vim.api.nvim_set_hl(0, "NonText",       { fg = color.base00, bg = nil })
+vim.api.nvim_set_hl(0, "SignColumn",   { fg = color.base0 , bg = nil })
 
 -- Markdown
 vim.api.nvim_set_hl(0, "markdownH1",     { fg = color.magenta500, bg = nil, bold = true }) -- int, long, char, etc.
