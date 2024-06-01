@@ -56,6 +56,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<leader>p", ":bPrev <CR>")
 vim.keymap.set("n", "<leader>n", ":bNext <CR>")
 
+vim.keymap.set("n", "<leader>z", ":ZenMode <CR>")
+
 vim.keymap.set("n", "<leader>x", "<cmd> !chmod +x % <CR>", { silent = true })
 
 -- Format .ledger file for personal finance
@@ -65,6 +67,13 @@ vim.keymap.set("n", "<leader>fg", "<cmd> !go fmt % <CR>", { silent = true })
 -------------------------------------------------------------------------------
 -- LSP
 -------------------------------------------------------------------------------
+--
+--
+require("zen-mode").setup({
+    window = {
+        width = .5 -- width will be 85% of the editor width
+    }
+})
 
 require('nvim-autopairs').setup({})
 
@@ -114,7 +123,7 @@ lsp.gopls.setup {
                 unusedparams = true,
                 unkeyedliteral = true,
                 unusedwrite = true,
-                fieldalignment = true,
+                fieldalignment = true, -- turn off warning for struct field ordering
                 nilness = true,
                 useany = true,
                 unusedvariable = true,
@@ -247,6 +256,7 @@ vim.g.loaded_netrw             = 1
 vim.g.loaded_netrwPlugin       = 1
 vim.g.loaded_netrwSettings     = 1
 vim.g.loaded_netrwFileHandlers = 1
+
 
 -------------------------------------------------------------------------------
 -- End
