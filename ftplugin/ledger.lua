@@ -23,11 +23,12 @@ vim.cmd('abb gas Expense:Transport:Gas  ')
 vim.cmd('abb metro Expense:Transport:Metro  ')
 vim.cmd('abb rental Expense:Transport:Rental  ')
 vim.cmd('abb uber Expense:Transport:Uber  ')
+vim.cmd('abb shop Expense:Shopping  ')
 
 vim.cmd('abb groc Expense:Food:Grocery  ')
 vim.cmd('abb dining Expense:Food:Dining   ')
 vim.cmd('abb beverage Expense:Food:Beverage  ')
-vim.cmd('abb internet Expense:Rental:Internet  ')
+vim.cmd('abb internet Expense:Living:Internet  ')
 vim.cmd('abb rental Expense:Rental:Principle  ')
 vim.cmd('abb sub Expense:Subscription  ')
 

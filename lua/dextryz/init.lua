@@ -1,4 +1,9 @@
-vim.cmd("colorscheme kanagawa")
+-------------------------------------------------------------------------------
+-- Colorscheme
+-------------------------------------------------------------------------------
+
+vim.g.everforest_transparent_background = 1
+vim.cmd("colorscheme everforest")
 vim.cmd("syntax on")
 
 -------------------------------------------------------------------------------
@@ -6,7 +11,6 @@ vim.cmd("syntax on")
 -------------------------------------------------------------------------------
 
 vim.g.mapleader      = " "                -- Remap leader to spacebar
-vim.o.mouse          = ""                -- Enable mouse completely (default), make "" to disable
 vim.o.shiftwidth     = 4                  -- Number of spaces tabs count for
 vim.o.tabstop        = 4                  -- Always use clipboard for all operations
 vim.o.laststatus     = 2                  -- Set the status line to always be visible
@@ -48,6 +52,13 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true, expr = true }
 )
 
+-- buffers
+vim.api.nvim_set_keymap("n", "tk", ":blast<enter>", {noremap=false})
+vim.api.nvim_set_keymap("n", "tj", ":bfirst<enter>", {noremap=false})
+vim.api.nvim_set_keymap("n", "th", ":bprev<enter>", {noremap=false})
+vim.api.nvim_set_keymap("n", "tl", ":bnext<enter>", {noremap=false})
+vim.api.nvim_set_keymap("n", "td", ":bdelete<enter>", {noremap=false})
+
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
@@ -64,11 +75,60 @@ vim.keymap.set("n", "<leader>x", "<cmd> !chmod +x % <CR>", { silent = true })
 vim.keymap.set("n", "<leader>fl", "<cmd> 0r !lgfmt % <CR>", { silent = true })
 vim.keymap.set("n", "<leader>fg", "<cmd> !go fmt % <CR>", { silent = true })
 
+
+-- [[ Configure Telescope ]]
+-- See `:help telescope` and `:help telescope.setup()`
+require('telescope').setup {
+  defaults = {
+    layout_strategy = "horizontal",
+    layout_config = {
+      preview_width = 0.65,     
+      horizontal = {
+        size = {
+          width = "95%",
+          height = "95%",
+        },
+      },
+    },
+  pickers = {
+    find_files = {
+      theme = "dropdown",
+    }
+  },
+  },
+}
+
+-- Enable telescope fzf native, if installed
+pcall(require('telescope').load_extension, 'fzf')
+
+-- See `:help telescope.builtin`
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader>/', function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = true,
+  })
+end, { desc = '[/] Fuzzily search in current buffer]' })
+
+vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>g', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>s', require('telescope.builtin').git_status, { desc = '' })
+vim.keymap.set('n', '<leader>w', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.api.nvim_set_keymap("n", "<Leader><tab>", "<Cmd>lua require('telescope.builtin').commands()<CR>", {noremap=false})
+vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+
+-- vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+-- vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+-- vim.keymap.set("n", "<Leader>sr", "<CMD>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>", silent)
+-- vim.keymap.set("n", "<Leader>sR", "<CMD>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>", silent)
+-- vim.keymap.set("n", "<Leader>sn", "<CMD>lua require('telescope').extensions.notify.notify()<CR>", silent)
+-- vim.api.nvim_set_keymap("n", "st", ":TodoTelescope<CR>", {noremap=true})
+
 -------------------------------------------------------------------------------
 -- LSP
 -------------------------------------------------------------------------------
---
---
+
 require("zen-mode").setup({
     window = {
         width = .5 -- width will be 85% of the editor width
@@ -82,9 +142,27 @@ local map = vim.api.nvim_set_keymap
 local lsp = require("lspconfig")
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
--- https://github.com/mickael-menu/zk/blob/main/docs/editors-integration.md
 require("zk").setup({
+  -- can be "telescope", "fzf", "fzf_lua", "minipick", or "select" (`vim.ui.select`)
+  -- it's recommended to use "telescope", "fzf", "fzf_lua", or "minipick"
     capabilities = capabilities,
+  picker = "select",
+
+  lsp = {
+    -- `config` is passed to `vim.lsp.start_client(config)`
+    config = {
+      cmd = { "zk", "lsp" },
+      name = "zk",
+      -- on_attach = ...
+      -- etc, see `:h vim.lsp.start_client()`
+    },
+
+    -- automatically attach buffers in a zk notebook that match the given filetypes
+    auto_attach = {
+      enabled = true,
+      filetypes = { "markdown" },
+    },
+  },
 })
 
 lsp.templ.setup({})
@@ -171,6 +249,7 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+
 -------------------------------------------------------------------------------
 -- Snippets
 -------------------------------------------------------------------------------
@@ -256,7 +335,6 @@ vim.g.loaded_netrw             = 1
 vim.g.loaded_netrwPlugin       = 1
 vim.g.loaded_netrwSettings     = 1
 vim.g.loaded_netrwFileHandlers = 1
-
 
 -------------------------------------------------------------------------------
 -- End
